@@ -2,203 +2,163 @@ package PP5_11;
 
 import java.util.Scanner;
 
-public class Pig
+public class Pig 
 {
-	PairOfDice player = new PairOfDice();
 	PairOfDice computer = new PairOfDice();
-	Scanner scan1 = new Scanner(System.in);
-	static int computerSumOfRolls=0;
-	static int playerSumOfRolls=0;
-	static boolean playerFirst=false;
-	static boolean computerFirst=false;
-	static boolean playerWon=false;
-	static boolean computerWon=false;
-	static int numOfOutputs=0;
-	static int rounds=1;
+	PairOfDice player = new PairOfDice();
+	Scanner scan=new Scanner(System.in);
+	static boolean playerTurn=false;
+	static boolean computerTurn=false;
+	static int accumulativeComputerPoints=0;
+	static int accumulativePlayerPoints=0;
+	static int tempComputerPoints=0;
+	static int tempPlayerPoints=0;
 	static int roundNum=1;
+	static int numTimesStringRun=0;
 	public void seeWhoGoesFirst()
 	{
-		int sumPlayer=0;
-		int sumComputer=0;
-		System.out.println("We will now see who goes first.");
-		while(sumPlayer==sumComputer)
+		System.out.println("Roll dice to see who goes first.");
+		System.out.println("After each roll you must press 'y' to keep rolling or press anything else to turn the dice over.");
+		
+		while(computer.sumOfRoll()==player.sumOfRoll())
 		{
-			sumPlayer=player.sumOfRoll();
-			sumComputer=computer.sumOfRoll();
-			if(sumPlayer>sumComputer)
-			{
-				playerFirst=true;
-				System.out.println("Player goes first");
-			}
-			else if(sumComputer>sumPlayer)
-			{
-				computerFirst=true;
-				System.out.println("Computer goes first");
-			}
+			computer.rollBoth();
+			player.rollBoth();
+		}
+		if(computer.sumOfRoll()>player.sumOfRoll())
+		{
+			System.out.println("The computer goes first.");
+			computerTurn=true;
+		}
+		else
+		{
+			System.out.println("The player goes first.");
+			playerTurn=true;
 		}
 	}
-	public int playerRoll()
+	public void computerRoll()
 	{
-			int tempCount=0;
-			while(tempCount<=20 && playerFirst==true)
-			{
-				int rolls= player.sumOfRoll();
-				if(rolls==2)
-				{
-					playerFirst=false;
-					playerSumOfRolls-=tempCount;
-					return playerSumOfRolls=0;
-				}
-				else if(player.rollDie1()==1)
-				{
-					playerFirst=false;
-					playerSumOfRolls-=tempCount;
-					tempCount=0;
-				}
-				else if(player.rollDie2()==1)
-				{
-					playerSumOfRolls-=tempCount;
-					playerFirst=false;
-					tempCount=0;
-				}
-				else
-				{
-					tempCount+=rolls;
-					playerSumOfRolls+=rolls;
-				}
-			}
-			if(playerSumOfRolls>=100)
-			{
-				playerWon=true;
-				playerFirst=false;
-				computerFirst=false;
-			}
-			tempCount=0;
-			playerFirst=false;
-			computerFirst=true;
-			return playerSumOfRolls;
-	}
-	public int computerRoll()
-	{
-			int tempCount=0;
-			while(tempCount<=20 && computerFirst==true)
-			{
-				int rolls= computer.sumOfRoll();
-				if(rolls==2)
-				{
-					computerSumOfRolls-=tempCount;
-					computerFirst=false;
-					return computerSumOfRolls=0;
-				}
-				else if(computer.rollDie1()==1)
-				{
-					computerFirst=false;
-					computerSumOfRolls-=tempCount;
-					tempCount=0;
-				}
-				else if(computer.rollDie2()==1)
-				{
-					computerFirst=false;
-					computerSumOfRolls-=tempCount;
-					tempCount=0;
-				}
-				else
-				{
-					tempCount+=rolls;
-					computerSumOfRolls+=rolls;
-				}
-			}
-			if(computerSumOfRolls>=100)
-			{
-				computerWon=true;
-				playerFirst=false;
-				computerFirst=false;
-			}
-			tempCount=0;
-			computerFirst=false;
-			playerFirst=true;
-			return computerSumOfRolls;
-	}
-	public String toString()
-	{
-		String tenSpaces="       ";
-		String nothing="Nothing";
-		if(numOfOutputs==0)
+		while(tempComputerPoints<20 &&computerTurn!=false)
 		{
-			System.out.println(tenSpaces+"  |"+"Computer's Points|Player's Points");
-			numOfOutputs++;
-			rounds++;
-		}
-		else if(numOfOutputs==1)
-		{
-			System.out.println("---------|-----------------|---------------");
-			numOfOutputs++;
-			rounds++;
-		}
-		else if(numOfOutputs==2)
-		{
-			if(rounds<10)
+			computer.rollBoth();
+			if(computer.sumOfRoll()==2)
 			{
-				if(computerSumOfRolls<10)
-				{
-					System.out.println("Round "+roundNum+"  |      "+computerSumOfRolls+"          |        "+playerSumOfRolls);
-				}
-				else if (computerSumOfRolls<100 && computerSumOfRolls>9)
-				{
-					System.out.println("Round "+roundNum+"  |      "+computerSumOfRolls+"         |        "+playerSumOfRolls);
-				}
+				tempComputerPoints=25;
+				accumulativeComputerPoints=0;
 			}
-			else if(rounds<100&& rounds>9)
-			{ 
-				if(computerSumOfRolls<10)
-				{
-					System.out.println("Round "+roundNum+" |      "+computerSumOfRolls+"          |        "+playerSumOfRolls);
-				}
-				else if (computerSumOfRolls<100 && computerSumOfRolls>9)
-				{
-					System.out.println("Round "+roundNum+" |      "+computerSumOfRolls+"         |        "+playerSumOfRolls);
-
-				}
+			else if(computer.getDie1Val()==1)
+			{
+				tempComputerPoints=25;
+			}
+			else if(computer.getDie2Val()==1)
+			{
+				tempComputerPoints=25;
 			}
 			else
 			{
-				if(computerSumOfRolls<10)
-				{
-					System.out.println("Round "+roundNum+"|      "+computerSumOfRolls+"        |        "+playerSumOfRolls);
-				}
-				else if (computerSumOfRolls<100 && computerSumOfRolls>9)
-				{
-					System.out.println("Round "+roundNum+" |      "+computerSumOfRolls+"        |        "+playerSumOfRolls);
-
-				}
-
+				tempComputerPoints+=computer.sumOfRoll();
+				accumulativeComputerPoints+=computer.sumOfRoll();
 			}
-			rounds++;
 		}
-		if(playerWon==true)
-		{
-			System.out.println("You won!");
-		}
-		if(computerWon==true)
-		{
-			System.out.println("The computer won!");
-		}
-		roundNum++;
-		return nothing;
-		
+		tempComputerPoints=0;
+		computerTurn=false;
+		playerTurn=true;
 	}
-	public static void main(String[]args)
+	public void playerRoll()
 	{
-		Pig pigPlay= new Pig();
-		pigPlay.seeWhoGoesFirst();
+		String keepPlaying;
 		do
 		{
-			pigPlay.toString();
-			pigPlay.computerRoll();
-			pigPlay.playerRoll();
-			
-		}while(computerWon!=true && playerWon!=true);
+			player.rollBoth();
+			if(player.sumOfRoll()==2)
+			{
+				tempPlayerPoints=25;
+				accumulativePlayerPoints=0;
+			}
+			else if(player.getDie1Val()==1)
+			{
+				tempPlayerPoints=25;
+			}
+			else if(player.getDie2Val()==1)
+			{
+				tempPlayerPoints=25;
+			}
+			else
+			{
+				tempPlayerPoints+=player.sumOfRoll();
+				accumulativePlayerPoints+=player.sumOfRoll();
+			}
+		}while(tempPlayerPoints<20 &&playerTurn!=false);
+		tempPlayerPoints=0;
+		computerTurn=true;
+		playerTurn=false;
 	}
-	
-	
+	public void getResults()
+	{
+		if(numTimesStringRun==0)
+		{
+			System.out.println("         |Computer Points|Player Points");
+			numTimesStringRun++;
+		}
+		else if(numTimesStringRun==1)
+		{ 
+			System.out.println("---------|---------------|---------");
+			numTimesStringRun++;
+		}
+		else if(numTimesStringRun==2)
+		{
+			if(roundNum<=9&&accumulativeComputerPoints<=9)
+			{
+			System.out.println("Round "+roundNum+"  |       "+accumulativeComputerPoints+"       |      "+accumulativePlayerPoints);
+			}
+			else if(roundNum<=9&&accumulativeComputerPoints<=99)
+			{
+			System.out.println("Round "+roundNum+"  |       "+accumulativeComputerPoints+"      |      "+accumulativePlayerPoints);
+			}
+			else if(roundNum<=9&&accumulativeComputerPoints<=999)
+			{
+			System.out.println("Round "+roundNum+"  |       "+accumulativeComputerPoints+"     |      "+accumulativePlayerPoints);
+			}
+			else if(roundNum<=99&&accumulativeComputerPoints<=9)
+			{
+			System.out.println("Round "+roundNum+" |       "+accumulativeComputerPoints+"       |      "+accumulativePlayerPoints);
+			}
+			else if(roundNum<=99&&accumulativeComputerPoints<=99)
+			{
+			System.out.println("Round "+roundNum+" |       "+accumulativeComputerPoints+"      |      "+accumulativePlayerPoints);
+			}
+			else if(roundNum<=99&&accumulativeComputerPoints<=999)
+			{
+			System.out.println("Round "+roundNum+" |       "+accumulativeComputerPoints+"     |      "+accumulativePlayerPoints);
+			}
+			roundNum++;
+		}
+	}
+	public void winner()
+	{
+		if(accumulativeComputerPoints>=100)
+		{
+			System.out.println("The computer won");
+		}	
+		if(accumulativePlayerPoints>=100)
+		{
+			System.out.println("The player won");
+		}
+	}
+	public static void main(String[] args)
+	{
+		Pig playGame=new Pig();
+		playGame.seeWhoGoesFirst();
+		playGame.getResults();
+		playGame.getResults();
+		while(accumulativeComputerPoints<100&&accumulativePlayerPoints<100)
+		{
+			playGame.getResults();
+			playGame.computerRoll();
+			playGame.playerRoll();
+		}
+		playGame.getResults();
+		playGame.winner();
+	}
+
 }
