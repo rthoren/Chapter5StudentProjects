@@ -1,5 +1,6 @@
 package PP5_11;
 
+import java.util.LinkedList;
 import java.util.Scanner;
 
 public class Pig 
@@ -15,6 +16,7 @@ public class Pig
 	static int tempPlayerPoints=0;
 	static int roundNum=1;
 	static int numTimesStringRun=0;
+	LinkedList<Integer> computerPointArray=new LinkedList<Integer>();
 	public void seeWhoGoesFirst()
 	{
 		System.out.println("Roll dice to see who goes first.");
