@@ -13,7 +13,15 @@ public class PairOfDice
 	}
 	public int sumOfRoll()
 	{
-		return rollDie1()+rollDie2();
+		return die1.getFaceValue()+die2.getFaceValue();
+	}
+	public int getDie1Val()
+	{
+		return die1.getFaceValue();
+	}
+	public int getDie2Val()
+	{
+		return die2.getFaceValue();
 	}
 	public void setDie1(int value)
 	{

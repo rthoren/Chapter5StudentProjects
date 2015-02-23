@@ -1,4 +1,4 @@
-package bookExamples;
+/*package bookExamples;
 
 import java.util.Scanner;
 
@@ -59,3 +59,4 @@ public class PigLatinTranslator
 	}
 
 }
+*/
