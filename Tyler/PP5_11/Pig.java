@@ -66,7 +66,6 @@ public class Pig
 	}
 	public void playerRoll()
 	{
-		String keepPlaying;
 		do
 		{
 			player.rollBoth();
