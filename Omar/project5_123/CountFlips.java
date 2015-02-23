@@ -9,7 +9,7 @@ public class CountFlips
 		final int FLIPS = 1000;
 		int heads = 0, tails = 0;
 		
-		Coin3 myCoin = new Coin3();
+		Coin1 myCoin = new Coin1();
 		
 		for (int count=1; count <= FLIPS; count++)
 		{
