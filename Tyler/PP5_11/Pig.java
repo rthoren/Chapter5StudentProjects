@@ -16,7 +16,9 @@ public class Pig
 	static int tempPlayerPoints=0;
 	static int roundNum=1;
 	static int numTimesStringRun=0;
-	LinkedList<Integer> computerPointArray=new LinkedList<Integer>();
+	static LinkedList<Integer> computerPointArray=new LinkedList<Integer>();
+	static LinkedList<Integer> playerPointArray=new LinkedList<Integer>();
+	static String keepRolling;
 	public void seeWhoGoesFirst()
 	{
 		System.out.println("Roll dice to see who goes first.");
@@ -40,6 +42,7 @@ public class Pig
 	}
 	public void computerRoll()
 	{
+		System.out.println("The computer is rolling now");
 		while(tempComputerPoints<20 &&computerTurn!=false)
 		{
 			computer.rollBoth();
@@ -62,6 +65,8 @@ public class Pig
 				accumulativeComputerPoints+=computer.sumOfRoll();
 			}
 		}
+		System.out.println("The computer's has "+accumulativeComputerPoints+" points");
+		computerPointArray.addLast(accumulativeComputerPoints);
 		tempComputerPoints=0;
 		computerTurn=false;
 		playerTurn=true;
@@ -89,7 +94,11 @@ public class Pig
 				tempPlayerPoints+=player.sumOfRoll();
 				accumulativePlayerPoints+=player.sumOfRoll();
 			}
-		}while(tempPlayerPoints<20 &&playerTurn!=false);
+			System.out.println("This roll you rolled "+ player.sumOfRoll()+" if you would like to roll again press 'y'");
+			keepRolling = scan.nextLine();
+		}while(tempPlayerPoints<20 &&playerTurn!=false&&keepRolling.equalsIgnoreCase("y"));
+		System.out.println("Your round is over, your total score is "+accumulativePlayerPoints);
+		playerPointArray.addLast(accumulativePlayerPoints);
 		tempPlayerPoints=0;
 		computerTurn=true;
 		playerTurn=false;
@@ -108,31 +117,34 @@ public class Pig
 		}
 		else if(numTimesStringRun==2)
 		{
-			if(roundNum<=9&&accumulativeComputerPoints<=9)
+			for(int i=0;i<computerPointArray.size(); i++)
 			{
-			System.out.println("Round "+roundNum+"  |       "+accumulativeComputerPoints+"       |      "+accumulativePlayerPoints);
+				if(roundNum<=9&&computerPointArray.get(i)<=9)
+				{
+				System.out.println("Round "+roundNum+"  |       "+computerPointArray.get(i)+"       |      "+playerPointArray.get(i));
+				}
+				else if(roundNum<=9&&computerPointArray.get(i)<=99)
+				{
+				System.out.println("Round "+roundNum+"  |       "+computerPointArray.get(i)+"      |      "+playerPointArray.get(i));
+				}
+				else if(roundNum<=9&&computerPointArray.get(i)<=999)
+				{
+				System.out.println("Round "+roundNum+"  |       "+computerPointArray.get(i)+"     |      "+playerPointArray.get(i));
+				}
+				else if(roundNum<=99&&computerPointArray.get(i)<=9)
+				{
+				System.out.println("Round "+roundNum+" |       "+computerPointArray.get(i)+"       |      "+playerPointArray.get(i));
+				}
+				else if(roundNum<=99&&computerPointArray.get(i)<=99)
+				{
+				System.out.println("Round "+roundNum+" |       "+computerPointArray.get(i)+"      |      "+playerPointArray.get(i));
+				}
+				else if(roundNum<=99&&computerPointArray.get(i)<=999)
+				{
+				System.out.println("Round "+roundNum+" |       "+computerPointArray.get(i)+"     |      "+playerPointArray.get(i));
+				}
+				roundNum++;
 			}
-			else if(roundNum<=9&&accumulativeComputerPoints<=99)
-			{
-			System.out.println("Round "+roundNum+"  |       "+accumulativeComputerPoints+"      |      "+accumulativePlayerPoints);
-			}
-			else if(roundNum<=9&&accumulativeComputerPoints<=999)
-			{
-			System.out.println("Round "+roundNum+"  |       "+accumulativeComputerPoints+"     |      "+accumulativePlayerPoints);
-			}
-			else if(roundNum<=99&&accumulativeComputerPoints<=9)
-			{
-			System.out.println("Round "+roundNum+" |       "+accumulativeComputerPoints+"       |      "+accumulativePlayerPoints);
-			}
-			else if(roundNum<=99&&accumulativeComputerPoints<=99)
-			{
-			System.out.println("Round "+roundNum+" |       "+accumulativeComputerPoints+"      |      "+accumulativePlayerPoints);
-			}
-			else if(roundNum<=99&&accumulativeComputerPoints<=999)
-			{
-			System.out.println("Round "+roundNum+" |       "+accumulativeComputerPoints+"     |      "+accumulativePlayerPoints);
-			}
-			roundNum++;
 		}
 	}
 	public void winner()
@@ -150,14 +162,20 @@ public class Pig
 	{
 		Pig playGame=new Pig();
 		playGame.seeWhoGoesFirst();
-		playGame.getResults();
-		playGame.getResults();
 		while(accumulativeComputerPoints<100&&accumulativePlayerPoints<100)
 		{
-			playGame.getResults();
+			if(accumulativePlayerPoints<=100)
+			{
 			playGame.computerRoll();
+			}
+			if(accumulativeComputerPoints<=100)
+			{
 			playGame.playerRoll();
+			}
 		}
+		System.out.println("Outputting scoreboard.");
+		playGame.getResults();
+		playGame.getResults();
 		playGame.getResults();
 		playGame.winner();
 	}
