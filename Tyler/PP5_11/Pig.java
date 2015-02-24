@@ -164,9 +164,16 @@ public class Pig
 		playGame.seeWhoGoesFirst();
 		while(accumulativeComputerPoints<100&&accumulativePlayerPoints<100)
 		{
+			if(accumulativePlayerPoints<=100)
+			{
 			playGame.computerRoll();
+			}
+			if(accumulativeComputerPoints<=100)
+			{
 			playGame.playerRoll();
+			}
 		}
+		System.out.println("Outputting scoreboard.");
 		playGame.getResults();
 		playGame.getResults();
 		playGame.getResults();
