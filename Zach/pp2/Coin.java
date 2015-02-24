@@ -1,9 +1,9 @@
-package pp1;
+package pp2;
 
 public class Coin 
 {
 	private final int HEADS = 0;
-	private int face;
+	private String heads = "Heads", tails = "Tails";
 	private boolean head;
 	
 	
@@ -26,7 +26,7 @@ public class Coin
 	}
 	public String toString()
 	{
-		return (face == HEADS) ? "HEADS" : "Tails";
+		return head ? heads : tails;
 	}
 
 }

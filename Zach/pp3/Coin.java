@@ -1,9 +1,9 @@
-package pp1;
+package pp3;
 
 public class Coin 
 {
 	private final int HEADS = 0;
-	private int face;
+	enum FACE {Heads, Tails};
 	private boolean head;
 	
 	
@@ -15,18 +15,20 @@ public class Coin
 	}
 	public void flip()
 	{
-		
+		FACE side1, side2;
+		side1 = FACE.Heads;
+		side2 = FACE.Tails;
 		head = ((int) (Math.random() * 2)) == 1;
 		
 		
 	}
-	public boolean isHeads()
+	public FACE isHeads()
 	{
-		return head;
+		return FACE.Heads;
 	}
 	public String toString()
 	{
-		return (face == HEADS) ? "HEADS" : "Tails";
+		return (HEADS == HEADS) ? "HEADS" : "Tails";
 	}
 
 }
