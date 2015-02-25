@@ -19,6 +19,7 @@ public class Pig
 	static LinkedList<Integer> computerPointArray=new LinkedList<Integer>();
 	static LinkedList<Integer> playerPointArray=new LinkedList<Integer>();
 	static String keepRolling;
+	static int i=0;
 	public void seeWhoGoesFirst()
 	{
 		System.out.println("Roll dice to see who goes first.");
@@ -117,7 +118,7 @@ public class Pig
 		}
 		else if(numTimesStringRun==2)
 		{
-			for(int i=0;i<computerPointArray.size(); i++)
+			do
 			{
 				if(roundNum<=9&&computerPointArray.get(i)<=9)
 				{
@@ -144,7 +145,8 @@ public class Pig
 				System.out.println("Round "+roundNum+" |       "+computerPointArray.get(i)+"     |      "+playerPointArray.get(i));
 				}
 				roundNum++;
-			}
+				i++;
+			}while(i<=computerPointArray.size());
 		}
 	}
 	public void winner()
@@ -176,7 +178,41 @@ public class Pig
 		System.out.println("Outputting scoreboard.");
 		playGame.getResults();
 		playGame.getResults();
-		playGame.getResults();
+		try
+		{
+			playGame.getResults();
+		}
+		catch(IndexOutOfBoundsException e)
+		{
+			
+		}
+		finally
+		{
+			if(roundNum<=9&&accumulativeComputerPoints<=9)
+			{
+			System.out.println("Round "+roundNum+"  |       "+accumulativeComputerPoints+"       |      "+accumulativePlayerPoints);
+			}
+			else if(roundNum<=9&&accumulativeComputerPoints<=99)
+			{
+			System.out.println("Round "+roundNum+"  |       "+accumulativeComputerPoints+"      |      "+accumulativePlayerPoints);
+			}
+			else if(roundNum<=9&&accumulativeComputerPoints<=999)
+			{
+			System.out.println("Round "+roundNum+"  |       "+accumulativeComputerPoints+"     |      "+accumulativePlayerPoints);
+			}
+			else if(roundNum<=99&&accumulativeComputerPoints<=9)
+			{ 
+			System.out.println("Round "+roundNum+" |       "+accumulativeComputerPoints+"       |     "+accumulativePlayerPoints);
+			}
+			else if(roundNum<=99&&accumulativeComputerPoints<=99)
+			{
+			System.out.println("Round "+roundNum+" |       "+accumulativeComputerPoints+"      |      "+accumulativePlayerPoints);
+			}
+			else if(roundNum<=99&&accumulativeComputerPoints<=999)
+			{
+			System.out.println("Round "+roundNum+" |       "+accumulativeComputerPoints+"     |      "+accumulativePlayerPoints);
+			}
+		}
 		playGame.winner();
 	}
 
