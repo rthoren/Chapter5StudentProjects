@@ -2,8 +2,8 @@ package PP5_10;
 
 public class PairOfDice
 {
-	Die die1;
-	Die die2;
+	Die die1= new Die();
+	Die die2= new Die();
 	public int rollDie1()
 	{
 		return die1.roll();

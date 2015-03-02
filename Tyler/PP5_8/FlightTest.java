@@ -2,10 +2,10 @@ package PP5_8;
 
 public class FlightTest
 {
-	Flight flight1;
-	Flight flight2;
-	Flight flight3;
-	Flight flight4;
+	static Flight flight1;
+	static Flight flight2;
+	static Flight flight3;
+	static Flight flight4;
 	public FlightTest()
 	{
 		flight1 = new Flight(null, 0, null, null);
@@ -13,6 +13,13 @@ public class FlightTest
 		flight3 = new Flight(null, 0, null, null);
 		flight4 = new Flight(null, 0, null, null);
 		
+	}
+	public static void main(String[]args)
+	{
+		flight1.getAirlineName();
+		flight2.getFlightNum();
+		flight3.getFlightOrigin();
+		flight4.getFlightDestination();
 	}
 	
 	
