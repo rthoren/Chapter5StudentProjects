@@ -24,4 +24,15 @@ public class SnakeEyes extends PairOfDice
 		ratio =(double)(numOfRolls)/(numOfSnakeEyes);
 		return ratio;
 	}
+	public static void main(String[]args)
+	{
+		SnakeEyes snake = new SnakeEyes();
+		int x=0;
+		while(x<=100)
+		{
+			snake.roll();
+			x++;
+		}
+		System.out.println(snake.ratio());
+	}
 }
