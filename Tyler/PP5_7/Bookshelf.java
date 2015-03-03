@@ -16,6 +16,7 @@ public class Bookshelf
 	}
 	public static void main(String[]args)
 	{
+		Bookshelf bookshelf= new Bookshelf();
 		book1.getCopyright();
 		book2.getPublisher();
 		book3.getAuthor();

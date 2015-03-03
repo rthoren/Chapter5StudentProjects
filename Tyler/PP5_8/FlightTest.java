@@ -16,6 +16,7 @@ public class FlightTest
 	}
 	public static void main(String[]args)
 	{
+		FlightTest flight = new FlightTest();
 		flight1.getAirlineName();
 		flight2.getFlightNum();
 		flight3.getFlightOrigin();
