@@ -17,6 +17,7 @@ public class Kennel
 	}
 	public static void main(String[]args)
 	{
+		Kennel kennel = new Kennel("Sampson", 12);
 		dog1.ageGetter();
 		dog2.humanAge();
 		dog3.nameGetter();

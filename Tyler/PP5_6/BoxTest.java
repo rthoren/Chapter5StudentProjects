@@ -15,6 +15,7 @@ public class BoxTest
 	}
 	public static void main(String[]args)
 	{
+		BoxTest box = new BoxTest();
 		box1.getDepth();
 		box2.getFull();
 		box3.getWidth();

@@ -1,4 +1,4 @@
-package project5_123;
+/*package project5_123;
 import java.util.Scanner;
 
 public class CountFlips 
@@ -28,3 +28,4 @@ public class CountFlips
 	}
 
 }
+*/

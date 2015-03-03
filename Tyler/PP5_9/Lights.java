@@ -15,9 +15,12 @@ public class Lights
 	}
 	public static void main(String[]args)
 	{
-		light1.on();
-		light2.toString();
-		light3.off();
-		light4.on();
+		Lights lights = new Lights();
+		System.out.println(
+		light1.on()+
+		light2.toString()+
+		light3.off()+
+		light4.on()
+		);
 	}
 }
